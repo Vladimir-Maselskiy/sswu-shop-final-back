@@ -6,40 +6,48 @@ const { Schema, model } = require('mongoose');
 
 const productsSchema = new Schema(
   {
-    typeOperation: {
+    group: {
       type: String,
-      enum: ['income', 'expense'],
-      required: [true, "Transaction's type is required"],
+      required: [true, 'Group is required'],
     },
-    category: {
+    image: {
       type: String,
-      required: [true, "Transaction's category is required"],
+      required: [true, 'Image is required'],
     },
-    comment: {
+    name: {
       type: String,
-      default: '',
+      required: [true, 'Name is required'],
     },
-    date: {
-      type: String,
-      default: '',
+    price: {
+      type: Number,
+      required: [true, 'Price is required'],
+    },
+    discount: {
+      type: Number,
+      default: 0,
     },
     timestamps: {
       type: Number,
       default: Number(new Date()),
     },
-    amount: {
+    rate: {
       type: Number,
-      required: [true, 'Sum is required'],
-      // default: null,
-    },
-    balanceAfterTransaction: {
-      type: String,
-      required: [true, 'balanceAfterTransaction is required'],
+      default: 3.5,
     },
 
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: 'user',
+    mainProductInfo: {
+      type: String,
+      required: [true, 'Main Product Info is required'],
+    },
+
+    description: {
+      type: String,
+      required: [true, 'Description is required'],
+    },
+
+    additionalInfo: {
+      type: String,
+      required: [true, 'Additional info is required'],
     },
   },
   { versionKey: false, timestamps: true }

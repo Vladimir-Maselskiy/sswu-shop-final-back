@@ -1,8 +1,4 @@
 const { Schema, model } = require('mongoose');
-// const Joi = require("joi");
-
-// const { handleSaveErrors } = require("../utils");
-// const { string } = require("joi");
 
 const productsSchema = new Schema(
   {
@@ -52,16 +48,6 @@ const productsSchema = new Schema(
   },
   { versionKey: false, timestamps: true }
 );
-
-// transactionSchema.post("save", handleSaveErrors);
-
-// const addSchema = Joi.object({
-// 	typeOperation: Joi.string().required(),
-// 	category: Joi.string().required(),
-// 	comment: Joi.string(),
-// 	date: Joi.string(),
-// 	amount: Joi.number().required(),
-// });
 
 const Product = model('products', productsSchema);
 

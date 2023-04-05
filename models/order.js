@@ -1,59 +1,77 @@
 const { Schema, model } = require('mongoose');
-// const Joi = require("joi");
 
-// const { handleSaveErrors } = require("../utils");
-// const { string } = require("joi");
+
+const orderItemsSchema = new Schema({
+  productId: {
+    type: String,
+    required: [true, 'ProductId is required'],
+  },
+  name: {
+    type: String,
+    required: [true, 'Name is required'],
+  },
+  image: {
+    type: String,
+    required: [true, 'Image is required'],
+  },
+  price: {
+    type: Number,
+    required: [true, 'Price is required'],
+  },
+  discount: {
+    type: Number,
+    required: [true, 'Discount is required'],
+  },
+  rate: {
+    type: Number,
+    required: [true, 'Rate is required'],
+  },
+  quantity: {
+    type: Number,
+    required: [true, 'Quantity is required'],
+  },
+});
 
 const orderSchema = new Schema(
   {
-    typeOperation: {
-      type: String,
-      enum: ['income', 'expense'],
-      required: [true, "Transaction's type is required"],
+    user: {
+      name: {
+        type: String,
+        required: [true, 'Name is required'],
+      },
+      email: {
+        type: String,
+        required: [true, 'Email is required'],
+      },
+      address: {
+        type: String,
+        required: [true, 'Address is required'],
+      },
+      phone: {
+        type: String,
+        required: [true, 'Phone is required'],
+      },
+      message: {
+        type: String,
+        required: [true, 'Message is required'],
+      },
     },
-    category: {
-      type: String,
-      required: [true, "Transaction's category is required"],
+    orderItems: [orderItemsSchema],
+    totalCost: {
+      type: Number,
+      required: [true, 'TotalCost is required'],
     },
-    comment: {
-      type: String,
-      default: '',
+    discount: {
+      type: Number,
     },
-    date: {
-      type: String,
-      default: '',
-    },
+
     timestamps: {
       type: Number,
       default: Number(new Date()),
     },
-    amount: {
-      type: Number,
-      required: [true, 'Sum is required'],
-      // default: null,
-    },
-    balanceAfterTransaction: {
-      type: String,
-      required: [true, 'balanceAfterTransaction is required'],
-    },
-
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: 'user',
-    },
   },
   { versionKey: false, timestamps: true }
 );
-
-// transactionSchema.post("save", handleSaveErrors);
-
-// const addSchema = Joi.object({
-// 	typeOperation: Joi.string().required(),
-// 	category: Joi.string().required(),
-// 	comment: Joi.string(),
-// 	date: Joi.string(),
-// 	amount: Joi.number().required(),
-// });
 
 const Order = model('orders', orderSchema);
 
